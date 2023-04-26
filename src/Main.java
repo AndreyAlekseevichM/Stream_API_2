@@ -44,11 +44,12 @@ public class Main {
         // список работоспособных людей с высшим образованием
         Collection<Person> workable = persons.stream()
                 .filter(person -> person.getEducation() == Education.HIGHER)
-                .filter(person -> person.getAge() >= 18 && person.getAge() <= 60  // работоспособные от 18 до 60 лет
-                        || person.getSex() == Sex.MAN && person.getAge() > 60 && person.getAge() <= 65)  // мужчины до 65 лет
+                .filter(person -> person.getAge() >= 18)
+                // .filter(person -> person.getSex() == Sex.MAN && person.getAge() <= 65 || person.getSex() == Sex.WOMAN && person.getAge() <= 60)
+                .filter(person -> person.getSex() == Sex.MAN ? person.getAge() <= 65 : person.getAge() <= 60)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
 
-        // System.out.println(workable);
+        System.out.println(workable);
     }
 }
